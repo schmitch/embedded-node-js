@@ -5,6 +5,7 @@ artifacts/
 
 # Downloaded Node binaries
 src/NodeJs.Embedded/runtimes/
+src/NodeJs.Embedded.Native.*/runtimes/
 
 # VS/OS cruft
 .vs/

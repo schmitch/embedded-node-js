@@ -28,13 +28,26 @@ jobs:
       - name: Download Node binaries
         run: ./scripts/download-node.sh $NODE_VERSION
 
+      - name: Determine package version
+        run: |
+          VERSION="0.2.0"
+          if [[ "${GITHUB_REF:-}" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          fi
+          echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Package version: $VERSION"
+
       - name: Pack NuGet
-        run: dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release -o artifacts
+        run: |
+          dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release -o artifacts /p:Version=$PACKAGE_VERSION /p:EmbeddedNodeJsNativeVersion=$PACKAGE_VERSION
+          for proj in src/NodeJs.Embedded.Native.*/NodeJs.Embedded.Native.*.csproj; do
+            dotnet pack "$proj" -c Release -o artifacts /p:Version=$PACKAGE_VERSION
+          done
 
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
-          name: embedded-nodejs-nuget
+          name: embedded-nodejs-nugets
           path: artifacts/*.nupkg
 
       - name: Upload symbols

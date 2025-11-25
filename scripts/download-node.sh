@@ -8,9 +8,13 @@ if [[ -z "$VERSION" ]]; then
 fi
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-RUNTIMES_DIR="$ROOT/src/NodeJs.Embedded/runtimes"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
+
+dest_for_rid() {
+  local rid="$1"
+  echo "$ROOT/src/NodeJs.Embedded.Native.${rid}/runtimes/${rid}/native"
+}
 
 download_and_stage() {
   local rid="$1"
@@ -51,7 +55,8 @@ download_and_stage() {
     exit 1
   fi
 
-  local dest_dir="$RUNTIMES_DIR/$rid/native"
+  local dest_dir
+  dest_dir="$(dest_for_rid "$rid")"
   mkdir -p "$dest_dir"
   cp "$node_path" "$dest_dir/"
   chmod +x "$dest_dir"/node*
@@ -70,4 +75,4 @@ download_and_stage "linux-arm64" "node-v${VERSION}-linux-arm64.tar.xz" "bin/node
 download_and_stage "osx-x64" "node-v${VERSION}-darwin-x64.tar.gz" "bin/node"
 download_and_stage "osx-arm64" "node-v${VERSION}-darwin-arm64.tar.gz" "bin/node"
 
-echo "Done. Files placed under $RUNTIMES_DIR"
+echo "Done. Files placed under src/NodeJs.Embedded.Native.* runtime folders."

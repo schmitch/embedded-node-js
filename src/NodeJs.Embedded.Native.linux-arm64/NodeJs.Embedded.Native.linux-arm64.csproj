@@ -3,20 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
-    <PackageId>EmbeddedNodeJs</PackageId>
+    <PackageId>EmbeddedNodeJs.Native.linux-arm64</PackageId>
     <Version>0.2.0</Version>
     <Authors>Embedded NodeJS</Authors>
-    <Description>Embeds prebuilt Node.js binaries (win/linux/mac, x64/arm64) for use by JavaScriptEngineSwitcher.Node or other hosts.</Description>
+    <Description>Embedded Node.js runtime for linux-arm64.</Description>
     <PackageProjectUrl>https://github.com/example/embedded-nodejs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/example/embedded-nodejs.git</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <EmbeddedNodeJsNativeVersion>0.2.0</EmbeddedNodeJsNativeVersion>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="buildTransitive/EmbeddedNodeJs.props" Pack="true" PackagePath="buildTransitive/EmbeddedNodeJs.props" />
+    <None Include="runtimes/linux-arm64/native/**" Pack="true" PackagePath="runtimes/linux-arm64/native/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
