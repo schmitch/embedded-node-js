@@ -7,8 +7,8 @@ on:
   pull_request:
 
 env:
-  DOTNET_VERSION: "8.0.x"
-  NODE_VERSION: "20.12.2"
+  DOTNET_VERSION: "9.0.x"
+  NODE_VERSION: "22.21.1"
 
 jobs:
   pack:
@@ -21,6 +21,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build
+        run: dotnet build src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
 
       - name: Download Node binaries
         run: ./scripts/download-node.sh $NODE_VERSION

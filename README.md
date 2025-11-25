@@ -10,7 +10,7 @@ This repository builds a NuGet package that bundles prebuilt Node.js executables
 ## Local workflow
 ```bash
 # Fetch Node distributions (customize NODE_VERSION as needed)
-./scripts/download-node.sh 20.12.2
+./scripts/download-node.sh 22.21.1
 
 # Pack the NuGet (outputs to bin/Debug and bin/Debug/EmbeddedNodeJs.0.1.0.nupkg)
 dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
@@ -42,6 +42,6 @@ dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
 3. The runtime-specific `node`/`node.exe` is copied automatically from `runtimes/<rid>/native/` into your build output when referencing the package.
 
 ## GitHub Actions
-- Workflow builds on `ubuntu-latest`.
-- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64`.
+- Workflow builds on `ubuntu-latest` with .NET 9.
+- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=22.21.1`).
 - Produces `.nupkg`/`.snupkg`. Optional publish can be enabled by adding `NUGET_API_KEY` and `NUGET_SOURCE` secrets.
