@@ -1,0 +1,52 @@
+name: build-and-pack
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  NODE_VERSION: "20.12.2"
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Download Node binaries
+        run: ./scripts/download-node.sh $NODE_VERSION
+
+      - name: Pack NuGet
+        run: dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release -o artifacts
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: embedded-nodejs-nuget
+          path: artifacts/*.nupkg
+
+      - name: Upload symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: embedded-nodejs-symbols
+          path: artifacts/*.snupkg
+
+      - name: Publish to NuGet
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
+        run: |
+          set -euo pipefail
+          : "${NUGET_API_KEY:?NUGET_API_KEY secret required to publish}"
+          NUGET_SOURCE="${NUGET_SOURCE:-https://api.nuget.org/v3/index.json}"
+          dotnet nuget push "artifacts/*.nupkg" --skip-duplicate --api-key "$NUGET_API_KEY" --source "$NUGET_SOURCE"
