@@ -60,15 +60,6 @@ public static class NodeRuntimeLocator
             }
         }
 
-        var runtimeIdentifier = RuntimeInformation.RuntimeIdentifier;
-        foreach (var rid in KnownRids)
-        {
-            if (runtimeIdentifier.StartsWith(rid, StringComparison.OrdinalIgnoreCase))
-            {
-                return rid;
-            }
-        }
-
         throw new PlatformNotSupportedException(
             $"No embedded Node.js binary is defined for OS '{RuntimeInformation.OSDescription}' " +
             $"and architecture '{RuntimeInformation.ProcessArchitecture}'.");
