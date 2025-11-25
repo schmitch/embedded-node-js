@@ -13,8 +13,7 @@
     <RepositoryUrl>https://github.com/example/embedded-nodejs.git</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
@@ -23,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="runtimes/win-x64/native/**/*" Pack="true" PackagePath="runtimes/win-x64/native/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes/win-x64/native/**/*" Pack="true" PackagePath="runtimes/win-x64/native" />
   </ItemGroup>
 
 </Project>
