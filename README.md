@@ -37,22 +37,18 @@ To align local packs with a tag version, pass `/p:Version=<tag>` and `/p:Embedde
    </ItemGroup>
    <!-- add other RIDs as needed -->
    ```
-2. Resolve the embedded Node path and pass it to the Node engine settings (example for .NET DI):
+2. Resolve the embedded Node path and pass it to your Node engine settings (examples for .NET DI):
    ```csharp
-   using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
-   using JavaScriptEngineSwitcher.Node;
-   using NodeJs.Embedded;
+   services
+       .AddJsEngineSwitcher(options => options.DefaultEngineName = NodeJsEngine.EngineName)
+       .AddNode();
 
-   services.AddSingleton<IJsEngineSwitcher, JsEngineSwitcher>(provider =>
-   {
-       var switcher = new JsEngineSwitcher(provider);
-       var nodeSettings = new NodeSettings
+   services
+       .AddNodeJS()
+       .Configure<NodeJSProcessOptions>(nodeProcessOptions =>
        {
-           EngineExecutablePath = NodeRuntimeLocator.GetNodeExecutablePath()
-       };
-       switcher.EngineFactories.Add(new NodeJsEngineFactory(nodeSettings));
-       return switcher;
-   });
+           nodeProcessOptions.ExecutablePath = NodeRuntimeLocator.GetNodeExecutablePath();
+       });
    ```
 3. The runtime-specific `node`/`node.exe` is copied automatically from `runtimes/<rid>/native/` into your build output when the correct native package is referenced (automatically when a single RID is set, or explicitly for multi-RID projects).
 
