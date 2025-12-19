@@ -6,7 +6,7 @@
     <LangVersion>latest</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
-    <PackageId>EmbeddedNodeJs</PackageId>
+    <PackageId>Envisia.EmbeddedNodeJs</PackageId>
     <Version>0.2.0</Version>
     <Authors>Embedded NodeJS</Authors>
     <Description>Embeds prebuilt Node.js binaries (win/linux/mac, x64/arm64) for use by JavaScriptEngineSwitcher.Node or other hosts.</Description>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="buildTransitive/EmbeddedNodeJs.props" Pack="true" PackagePath="buildTransitive/EmbeddedNodeJs.props" />
+    <None Include="buildTransitive/Envisia.EmbeddedNodeJs.props" Pack="true" PackagePath="buildTransitive/Envisia.EmbeddedNodeJs.props" />
   </ItemGroup>
 
 </Project>

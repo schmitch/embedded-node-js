@@ -7,22 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(_EmbeddedNodeJsPrimaryRid)'!=''">
-    <PackageReference Include="EmbeddedNodeJs.Native.win-x64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.win-x64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='win-x64'" />
-    <PackageReference Include="EmbeddedNodeJs.Native.win-arm64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.win-arm64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='win-arm64'" />
-    <PackageReference Include="EmbeddedNodeJs.Native.linux-x64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.linux-x64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='linux-x64'" />
-    <PackageReference Include="EmbeddedNodeJs.Native.linux-arm64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.linux-arm64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='linux-arm64'" />
-    <PackageReference Include="EmbeddedNodeJs.Native.osx-x64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.osx-x64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='osx-x64'" />
-    <PackageReference Include="EmbeddedNodeJs.Native.osx-arm64"
+    <PackageReference Include="Envisia.EmbeddedNodeJs.Native.osx-arm64"
                       Version="$(EmbeddedNodeJsNativeVersion)"
                       Condition="'$(_EmbeddedNodeJsPrimaryRid)'=='osx-arm64'" />
   </ItemGroup>
