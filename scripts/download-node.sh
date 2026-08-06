@@ -3,7 +3,7 @@ set -euo pipefail
 
 VERSION="${1:-}"
 if [[ -z "$VERSION" ]]; then
-  echo "Usage: $(basename "$0") <node-version> (example: $(basename "$0") 24.19.0)" >&2
+  echo "Usage: $(basename "$0") <node-version> (example: $(basename "$0") 26.7.0)" >&2
   exit 1
 fi
 
