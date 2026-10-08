@@ -57,3 +57,6 @@ To align local packs with a tag version, pass `/p:Version=<tag>` and `/p:Embedde
 - Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=26.11.1`).
 - Packs all helper + native packages, uploads artifacts, and can publish on tags. Optional publish can be enabled by adding `NUGET_API_KEY` and `NUGET_SOURCE` secrets.
 - If the workflow runs on a tag `vX.Y.Z`, that tag value is used as the package version; otherwise it defaults to 0.2.0.
+
+## Keeping Node.js up to date
+`.claude/settings.json` registers a Claude Code `SessionStart` hook (`.claude/hooks/check-node-update.sh`). When a new session starts, at most once a month (counted from the last check in this checkout or the last commit that changed `NODE_VERSION`), it looks up the newest Node.js release on `nodejs.org` that ships all six archives. If that release is newer than `NODE_VERSION`, Claude offers to bump it and verify the downloads. Set `NODE_UPDATE_CHECK_FORCE=1` to skip the monthly throttle.

@@ -7,6 +7,9 @@ artifacts/
 src/NodeJs.Embedded/runtimes/
 src/NodeJs.Embedded.Native.*/runtimes/
 
+# Claude Code hook state (last monthly Node.js update check)
+.claude/.node-update-check
+
 # VS/OS cruft
 .vs/
 *.user
