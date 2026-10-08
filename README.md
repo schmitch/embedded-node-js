@@ -11,7 +11,7 @@ This repository builds a family of NuGet packages that bundle prebuilt Node.js e
 ## Local workflow
 ```bash
 # Fetch Node distributions (customize NODE_VERSION as needed)
-./scripts/download-node.sh 26.7.0
+./scripts/download-node.sh 26.11.1
 
 # Pack all packages
 dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
@@ -54,6 +54,6 @@ To align local packs with a tag version, pass `/p:Version=<tag>` and `/p:Embedde
 
 ## GitHub Actions
 - Workflow builds on `ubuntu-latest` with .NET 9.
-- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=26.7.0`).
+- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=26.11.1`).
 - Packs all helper + native packages, uploads artifacts, and can publish on tags. Optional publish can be enabled by adding `NUGET_API_KEY` and `NUGET_SOURCE` secrets.
 - If the workflow runs on a tag `vX.Y.Z`, that tag value is used as the package version; otherwise it defaults to 0.2.0.
