@@ -57,7 +57,11 @@ To align local packs with a tag version, pass `/p:Version=<tag>` and `/p:Embedde
 ## GitHub Actions
 - Workflow builds on `ubuntu-latest` with .NET 9 for pushes to `main-v26`, `node26-v*` tags, and pull requests.
 - Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=26.12.1`).
-- Packs all helper + native packages, uploads artifacts, and can publish on tags. Optional publish can be enabled by adding `NUGET_API_KEY` and `NUGET_SOURCE` secrets.
+- Packs all helper + native packages and uploads them as artifacts.
+- On a release tag, a separate `publish` job pushes the packages to nuget.org with [trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing), so no API key is stored in the repository. It needs:
+  - a trusted publishing policy on nuget.org (owned by the account that owns the packages) with Repository Owner `schmitch`, Repository `embedded-node-js`, Workflow File `publish.yml` and Environment `nuget`;
+  - a GitHub Actions secret `NUGET_USER` with that account's nuget.org profile name (not the email address);
+  - optionally, protection rules on the `nuget` GitHub environment (for example, only the release tags may deploy, or a required reviewer).
 - If the workflow runs on a tag `node26-vX.Y.Z`, `X.Y.Z` is used as the package version; otherwise it defaults to 0.2.0. Plain `vX.Y.Z` tags are the Node 24 releases from `main` and are ignored by this branch's workflow.
 
 ## Keeping Node.js up to date
