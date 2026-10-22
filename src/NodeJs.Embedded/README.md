@@ -1,11 +1,11 @@
-# Embedded Node.js
+# Embedded Node.js 26
 
-NuGet package that ships prebuilt Node.js executables for Windows, Linux, and macOS (x64/arm64). It removes the requirement for a machine-level Node installation and is intended to be used together with `JavaScriptEngineSwitcher.Node` or any host that needs a portable `node` binary.
+NuGet package that ships prebuilt Node.js 26 executables for Windows, Linux, and macOS (x64/arm64). It removes the requirement for a machine-level Node installation and is intended to be used together with `JavaScriptEngineSwitcher.Node` or any host that needs a portable `node` binary.
 
 ## Installing
 Add the package reference (with a single `RuntimeIdentifier` set, the correct native package is pulled automatically):
 ```xml
-<PackageReference Include="EmbeddedNodeJs" Version="0.2.0" />
+<PackageReference Include="Envisia.EmbeddedNodeJs26" Version="0.2.0" />
 ```
 
 Resolve the embedded executable path and pass it to your `JavaScriptEngineSwitcher.Node` settings:
@@ -22,7 +22,7 @@ var settings = new NodeSettings
 ## Building locally
 ```bash
 # Fetch Node distributions into runtimes/<rid>/native/ for each native package
-./scripts/download-node.sh 24.22.1
+./scripts/download-node.sh 26.12.1
 
 # Pack helper + native packages
 dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
@@ -35,10 +35,10 @@ done
 If your project targets multiple RIDs, explicitly include the matching native packages with conditions:
 ```xml
 <ItemGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
-  <PackageReference Include="EmbeddedNodeJs.Native.linux-x64" Version="0.2.0" />
+  <PackageReference Include="Envisia.EmbeddedNodeJs26.Native.linux-x64" Version="0.2.0" />
 </ItemGroup>
 <ItemGroup Condition="'$(RuntimeIdentifier)'=='win-x64'">
-  <PackageReference Include="EmbeddedNodeJs.Native.win-x64" Version="0.2.0" />
+  <PackageReference Include="Envisia.EmbeddedNodeJs26.Native.win-x64" Version="0.2.0" />
 </ItemGroup>
 <!-- add more RIDs as needed -->
 ```
