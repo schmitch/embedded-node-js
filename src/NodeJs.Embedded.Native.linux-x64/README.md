@@ -3,7 +3,7 @@
 Runtime-only package that ships the Node.js executable for linux-x64.
 
 Usage:
-- Install the package alongside `EmbeddedNodeJs` (helper) and `JavaScriptEngineSwitcher.Node`.
+- Install the package alongside `Envisia.EmbeddedNodeJs26` (helper) and `JavaScriptEngineSwitcher.Node`.
 - The Node binary will be copied from `runtimes/linux-x64/native/`.
 
 Version: 0.1.0
