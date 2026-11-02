@@ -11,7 +11,7 @@ This repository builds a family of NuGet packages that bundle prebuilt Node.js e
 ## Local workflow
 ```bash
 # Fetch Node distributions (customize NODE_VERSION as needed)
-./scripts/download-node.sh 24.22.1
+./scripts/download-node.sh 24.22.2
 
 # Pack all packages
 dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
@@ -54,7 +54,7 @@ To align local packs with a tag version, pass `/p:Version=<tag>` and `/p:Embedde
 
 ## GitHub Actions
 - Workflow builds on `ubuntu-latest` with .NET 9.
-- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=24.22.1`).
+- Downloads Node archives for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, `osx-arm64` (default `NODE_VERSION=24.22.2`).
 - Packs all helper + native packages and uploads them as artifacts.
 - On a release tag, a separate `publish` job pushes the packages to nuget.org with [trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing), so no API key is stored in the repository. It needs:
   - a trusted publishing policy on nuget.org (owned by the account that owns the packages) with Repository Owner `schmitch`, Repository `embedded-node-js`, Workflow File `publish.yml` and Environment `nuget`;

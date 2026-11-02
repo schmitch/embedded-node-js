@@ -11,7 +11,7 @@ permissions:
 
 env:
   DOTNET_VERSION: "9.0.x"
-  NODE_VERSION: "24.22.1"
+  NODE_VERSION: "24.22.2"
 
 jobs:
   pack:
