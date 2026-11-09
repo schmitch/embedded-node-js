@@ -22,7 +22,7 @@ var settings = new NodeSettings
 ## Building locally
 ```bash
 # Fetch Node distributions into runtimes/<rid>/native/ for each native package
-./scripts/download-node.sh 24.22.2
+./scripts/download-node.sh 26.13.0
 
 # Pack helper + native packages
 dotnet pack src/NodeJs.Embedded/NodeJs.Embedded.csproj -c Release
